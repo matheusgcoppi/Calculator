@@ -1,6 +1,15 @@
-const display = document.querySelector('.display');
-const num = Number (document.querySelectorAll('.btn-num'));
+function createCalculator () {
+    return {
+        display: document.querySelector('.display'),
 
-num.forEach(btn =>{
-    btn.ad
-});
+        start() {
+            alert('hello')
+        }
+    }
+}
+
+const calculator = createCalculator();
+calculator.start();
+
+
+
