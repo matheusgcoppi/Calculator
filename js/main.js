@@ -9,9 +9,14 @@ function createCalculator () {
         clickButtons() {
             document.addEventListener('click', (e) => {
                 const element = e.target; //it will show up all stuff What I click, so useful
-                if(element ==)
-            });
+                if(element.classList.contains('btn-num')) {
+                    this.buttonToDisplay();
+                }
+            }.bind(this));
         },
+        buttonToDisplay(value) {
+
+        }
     }
 }
 
