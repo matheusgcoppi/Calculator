@@ -14,7 +14,7 @@ function createCalculator () {
                 const element = e.target; //it will show up all stuff What I click, so useful
             //this => document
                 if(element.classList.contains('btn-num')) {
-                    this.buttonToDisplay(element.innerText); //I need to use .This because when one method calls another method, e.g: if I want inicialize clickButtons() inside the start() I will use .this like in this case
+                    this.buttonToDisplay(element.innerText); //I need to use .This because when one method calls another method, e.g: if I want initialize clickButtons() inside the start() I will use .this like in this case
                 }
                 
                 if(element.classList.contains('btn-clear')) this.clearDisplay();
