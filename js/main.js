@@ -1,64 +1,57 @@
-function createCalculator () {
-    return {
-        display: document.querySelector('.display'),
-        clear: document.querySelector('.btn-clear'),
+function Calculator() {
+    this.display = document.querySelector('.display');
+    this.clear = document.querySelector('.clear');
 
-        start() {
-            alert('hello');
-            this.clickButtons();
-        },
+    this.startCalculator = () => {
+        alert('Hello');
+        this.clickButtons()
+        this.clickEnter()
+    }; 
 
-        clickButtons() {
-            //this => calculator
-            document.addEventListener('click', function(e) {
-                const element = e.target; //it will show up all stuff What I click, so useful
-            //this => document
-                if(element.classList.contains('btn-num')) {
-                    this.buttonToDisplay(element.innerText); //I need to use .This because when one method calls another method, e.g: if I want initialize clickButtons() inside the start() I will use .this like in this case
-                }
-                
-                if(element.classList.contains('btn-clear')) this.clearDisplay();
+    this.clickButtons = () => {
+        document.addEventListener('click', e => {
+            const element = e.target
+            if(element.classList.contains('btn-num')) this.showDisplay(element);
 
-                if(element.classList.contains('btn-del')) this.deleteOne();
+            if(element.classList.contains('btn-clear')) this.clearButton();
 
-                if(element.classList.contains('btn-equal')) this.equalDisplay();
+            if(element.classList.contains('btn-del')) this.delete();
 
-            }.bind(this)) //I use .bind because in this case we can represent the display/calculator and without the .bind this will point to the document and not the calculator
-        },
-        
-        buttonToDisplay(value) {
-            this.display.value += value;
-        },
+            if(element.classList.contains('btn-equal')) this.makeCount();
+        });
+    };
 
-        clearDisplay() {
-            this.display.value = ''
-        },
+    this.clickEnter = () => {
+        document.addEventListener('keyup', (e) => {
+            if(e.key === 'Enter') {
+                this.makeCount();   
+        }
+        })
+    }
 
-        deleteOne() {
-            this.display.value = this.display.value.slice(0, -1);
-        },
+    this.showDisplay = (element) => {
+        this.display.value += element.innerText;
+        this.display.focus() //If I don't use it, I'll focus in another button and duplicate
+    };
 
-        equalDisplay() {
-            //let count = this.display.value;
+    this.clearButton = () => this.display.value = '';
 
-            try {
-                this.display.value = eval(this.display.value);
+    this.delete = () => this.display.value = this.display.value.slice(0,-1); 
 
-              if(!this.display.value) {
+    this.makeCount = () => {
+        try {
+            this.display.value = eval(this.display.value);
+
+            if(!this.display.value) {
                 alert('Invalid count, please try again');
                 return;
             }
-            } catch (error) {
-                alert('Invalid count, please try again');
-                return;
-            }
+        } catch (error) {
+            alert('Invalid count, please try again');
+            return;
         }
     }
-}
+    }
 
-const calculator = createCalculator();
-calculator.start();
-
-
-
-
+const calculator = new Calculator;
+calculator.startCalculator()
